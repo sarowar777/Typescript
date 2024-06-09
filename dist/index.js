@@ -197,7 +197,7 @@ const account1 = {
     balance: 100000,
 };
 const combineUserAccount = (userss, accounts) => {
-    return Object.assign(Object.assign({}, userss), accounts);
+    return { ...userss, ...accounts };
 };
 const result123 = combineUserAccount(user3, account1);
 console.log(result123);
