@@ -1,5 +1,5 @@
 const getUsername=document.querySelector("#user") as HTMLInputElement;
-const formSubmit= document.querySelector(".form") as HTMLFormElement;
+const formSubmit= document.querySelector("#form") as HTMLFormElement;
 const main_container=document.querySelector(".main_container") as HTMLElement;
 
 
@@ -65,7 +65,7 @@ formSubmit.addEventListener('submit',async(e)=>{
   const searchTerm=getUsername.value.toLowerCase();
 
   try{
-const url="https://api/github.com/users";
+const url="https://api.github.com/users";
 
 const allUserData=await myCustomFetcher<UserData[]>(url,{});
 const matchingUsers=allUserData.filter((user)=>{
@@ -77,6 +77,11 @@ if(matchingUsers.length===0){
     "beforeend",
     `<p class="empty-msg">No matching users found.</p>`
   );
+}
+else{
+  for(const singleUser of matchingUsers){
+    showResultUI(singleUser);
+  }
 }
   }
   catch(error){
